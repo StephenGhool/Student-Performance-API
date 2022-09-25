@@ -1,7 +1,10 @@
 import string
+from urllib import response
 from fastapi import FastAPI
 from pydantic import BaseModel
 from sklearn.preprocessing import MinMaxScaler
+from model import Prediction
+import json
 
 app = FastAPI()
 
@@ -35,6 +38,11 @@ class student_data(BaseModel):
 # test server health
 @app.get("/health")
 def apitest():
+    """_summary_
+    Health Check 
+    Returns:
+        (str) : status of server's health
+    """
     return {"Healthy: API working"}
 
 
@@ -50,11 +58,10 @@ async def predict(student: student_data):
     Returns:
         _type_: student performance prediction
     """
-    # preprocess data
-    scaler = MinMaxScaler()
-    # X_train = scaler.fit_transform(X_train)
-    return student.student_details
-
+    prediction_model = Prediction()
+    performance = prediction_model.predict(student.student_details)
+    result = json.dumps(performance.tolist())
+    return result
 
 
 @app.get("/")
