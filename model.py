@@ -21,7 +21,7 @@ class Prediction():
         """_summary_
         This function is used to load the prediction model
         """ 
-        loaded_model = joblib.load('/best_model_15_inputs.pkl')
+        loaded_model = joblib.load('models/best_model_15_inputs.pkl')
         return loaded_model
 
 
