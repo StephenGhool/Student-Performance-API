@@ -1,0 +1,7 @@
+version: "3.9"
+services:
+  student_performance:
+    image: stephenghool/student_performance_fastapi_docker:V1
+    ports:
+      - "80:8000"
+  
